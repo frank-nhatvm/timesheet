@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="timeSheet"
+            type="com.frank.timesheet.data.entities.TimeSheet" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_margin="24dp">
+
+        <TextView
+            android:id="@+id/tvStaffAvatar"
+            style="@style/title_medium_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_staff_name"
+            android:gravity="center"
+            android:text="@{timeSheet.staff.characterForAvatar()}"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="B" />
+
+        <TextView
+            style="@style/title_medium_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@{timeSheet.staff.fullName()}"
+            app:layout_constraintBottom_toBottomOf="@id/tvStaffAvatar"
+            app:layout_constraintStart_toEndOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toTopOf="@id/tvStaffAvatar"
+            tools:text="Barco" />
+
+        <TextView
+            android:id="@+id/tvOrchard"
+            style="@style/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/orchard"
+            app:layout_constraintStart_toStartOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvStaffAvatar" />
+
+        <TextView
+            style="@style/title_small_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvOrchard"
+            app:layout_constraintStart_toEndOf="@id/tvOrchard"
+            tools:text="Benjin" />
+
+        <TextView
+            android:id="@+id/tvBlock"
+            style="@style/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:text="@string/block"
+            app:layout_constraintStart_toStartOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvOrchard" />
+
+        <TextView
+            style="@style/title_small_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvBlock"
+            app:layout_constraintStart_toEndOf="@id/tvBlock"
+            tools:text="UB14" />
+
+        <TextView
+            android:id="@+id/tvRateType"
+            style="@style/title_medium_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="@string/rate_type"
+            app:layout_constraintStart_toStartOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvBlock" />
+
+        <LinearLayout
+            android:id="@+id/llButtonRateType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvRateType">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/background_rate_type_button_selected"
+                android:paddingVertical="12dp"
+                android:text="@string/piece_rate"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/background_rate_type_button_unselected"
+                android:paddingVertical="12dp"
+                android:text="@string/wages"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvWagesDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvStaffAvatar"
+            app:layout_constraintTop_toBottomOf="@id/llButtonRateType" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llButtonRateType">
+
+
+            <TextView
+                android:id="@+id/btnApplyToAll"
+                style="@style/title_medium_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_to_all"
+                android:textAllCaps="true"
+                android:textColor="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="@id/layoutRateValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/layoutRateValue" />
+
+            <View
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+
+
+                app:layout_constraintBottom_toTopOf="@id/tvRateTile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRateTile" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutRateValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/background_rate_value"
+                android:padding="12dp"
+                app:layout_constraintEnd_toStartOf="@id/btnApplyToAll"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline"
+
+                >
+
+                <TextView
+                    android:id="@+id/tvCurrencySymbol"
+                    style="@style/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvTimeUnit"
+                    style="@style/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/hour"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    style="@style/body_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="6dp"
+                    android:background="@null"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvTimeUnit"
+                    app:layout_constraintStart_toEndOf="@id/tvCurrencySymbol"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="35" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvRateTile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@color/white"
+                android:padding="6dp"
+                android:text="@string/rate"
+                android:textColor="@color/text_color_subtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="12dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

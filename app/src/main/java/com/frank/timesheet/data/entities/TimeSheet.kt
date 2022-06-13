@@ -1,19 +1,22 @@
 package com.frank.timesheet.data.entities
 
 
-
 class TimeSheet(
     val timeSheetId: Int,
     val staff: Staff,
     val block: BlockTimeSheet,
-    val orchardName:String,
+    val orchardName: String,
     var rateType: RateType = RateType.PIECE_RATE,
     var rateValue: Int = -1,
     val typeJob: TypeJob,
 ) {
-    fun blockName():String{
+    fun blockName(): String {
         return block.blockName
     }
+
+
+
+
 
 }
 
@@ -25,20 +28,36 @@ data class BlockTimeSheet(
 
 class RowTimeSheet(
     val row: Row,
-    val listTask : List<Task> = emptyList(),
+    val listTask: List<Task> = emptyList(),
     var treeOfCurrentCustomer: Int = 0
-){
-    fun getMaxTreeNumber(): Int{
+) {
+
+    fun getListJobInString(): String{
+        val stringBuilder = StringBuilder()
+        listTask.forEach { task ->
+            val staffFullName = task.staff.fullName()
+            stringBuilder.append("$staffFullName(${task.treeNumber})")
+            stringBuilder.append(" ")
+        }
+        return stringBuilder.toString()
+    }
+
+    fun getMaxTreeNumber(): Int {
         return row.maxTreeNumber
     }
 
-    fun getDoneTreeNumberOfOtherStaffs(): Int{
+    fun getDoneTreeNumberOfOtherStaffs(): Int {
         return listTask.sumOf { it.treeNumber }
     }
 
-    fun getAvailableTreeNumber():Int{
+    fun getAvailableTreeNumber(): Int {
         return (getMaxTreeNumber() - (treeOfCurrentCustomer + getDoneTreeNumberOfOtherStaffs()))
     }
+
+    fun hasDoneTask():Boolean{
+        return listTask.isNotEmpty()
+    }
+
 }
 
 data class Task(
@@ -47,12 +66,12 @@ data class Task(
     val treeNumber: Int,
 )
 
-enum class RateType(val type:String){
+enum class RateType(val type: String) {
     PIECE_RATE("1"),
     WAGES("2"),
 }
 
-enum class TypeJob(val  type: String){
+enum class TypeJob(val type: String) {
     PRUNING("1"),
     THINNING("2"),
 }
