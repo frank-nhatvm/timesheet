@@ -5,12 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import com.frank.timesheet.R
 import com.frank.timesheet.base.component.BaseComponent
 import com.frank.timesheet.data.entities.RowTimeSheet
-import java.lang.Exception
+import com.frank.timesheet.data.entities.TypeJob
+import com.frank.timesheet.ui.timesheet.TimeSheetViewModel
+import kotlin.Exception
 
-class RowItemValueComponent constructor(context: Context, private val row: RowTimeSheet) :
+class RowItemValueComponent constructor(
+    context: Context, private val row: RowTimeSheet, private val timeSheetId: Int,
+    private val typeJob: TypeJob,
+    private val timeSheetViewModel: TimeSheetViewModel
+) :
     BaseComponent(context) {
 
     private var edtTreeNumber: EditText? = null
@@ -28,6 +35,20 @@ class RowItemValueComponent constructor(context: Context, private val row: RowTi
         edtTreeNumber = rootView.findViewById(R.id.edtTreeNumber)
         edtTreeNumber?.setText(row.treeOfCurrentCustomer.toString())
 
+        edtTreeNumber?.addTextChangedListener { text ->
+            try {
+                val number = text.toString().toInt()
+                timeSheetViewModel.updateTreeNumberForRow(
+                    treeNumber = number,
+                    rowId = row.row.rowId,
+                    timeSheetId = timeSheetId,
+                    typeJob = typeJob
+                )
+            } catch (e: Exception) {
+
+            }
+        }
+
         val tvJobs = rootView.findViewById<TextView>(R.id.tvJobs)
         tvJobs.text = row.getListJobInString()
 
@@ -35,18 +56,15 @@ class RowItemValueComponent constructor(context: Context, private val row: RowTi
     }
 
 
-    fun getDoneTreeNumber(): Int {
-        val number = edtTreeNumber?.text.toString()
-
-        return try {
-            number.toInt()
-        } catch (e: Exception) {
-            0
-        }
-    }
-
     fun updateTreeNumber(number: Int) {
-        edtTreeNumber?.setText( number.toString())
+        edtTreeNumber?.setText(number.toString())
     }
 
+    fun getRowId(): Int {
+        return row.row.rowId
+    }
+
+    fun getRootViewForRemove(): View {
+        return rootView
+    }
 }

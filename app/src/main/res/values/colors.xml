@@ -7,4 +7,7 @@
     <color name="primary_color">#ff4f0f</color>
     <color name="text_color">#333333</color>
     <color name="text_color_subtitle">#b8bbbf</color>
+
+    <color name="second_button_color">#f21f46</color>
+
 </resources>

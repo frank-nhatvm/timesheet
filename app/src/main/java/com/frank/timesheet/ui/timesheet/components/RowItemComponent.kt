@@ -20,6 +20,8 @@ class RowItemComponent constructor(
     private var isSelected = false
 
     override fun createView(): View {
+        isSelected = row.isSelected
+
         val inflater = LayoutInflater.from(context)
         rootView = inflater.inflate(R.layout.component_row_item, null, false)
 
