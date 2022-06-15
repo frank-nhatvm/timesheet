@@ -35,6 +35,24 @@ class BlockTimeSheet(
             }
         }
     }
+
+    fun updateMaxTree(mapStaffWorkingRow:Map<Int,Int>, shouldAddRemainderTree: Boolean){
+        listRowTimeSheet.forEach { rowTimeSheet ->
+            if (rowTimeSheet.isSelected) {
+                val rowId = rowTimeSheet.row.rowId
+                val numberStaffWorkingOnThisRow = mapStaffWorkingRow[rowId] ?: 1
+                val availableTree = rowTimeSheet.getAvailableTreeNumber()
+                var maxTree = availableTree / numberStaffWorkingOnThisRow
+                val remainderTree = availableTree % numberStaffWorkingOnThisRow
+                if (shouldAddRemainderTree) {
+                    maxTree += remainderTree
+                }
+                rowTimeSheet.treeOfCurrentCustomer = maxTree
+            }
+
+        }
+    }
+
 }
 
 class RowTimeSheet(

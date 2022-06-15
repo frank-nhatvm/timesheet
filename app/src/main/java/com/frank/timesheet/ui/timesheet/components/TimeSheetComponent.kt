@@ -19,6 +19,7 @@ class TimeSheetComponent constructor(
 ) : BaseComponent(context = context) {
 
     private var typeJob: TypeJob = TypeJob.PRUNING
+    private val listStaffTimesheetComponent = mutableListOf<StaffTimesheetComponent>()
 
     override fun createView(): View {
         typeJob = getTypeJob()
@@ -37,6 +38,7 @@ class TimeSheetComponent constructor(
         val llTimeSheet = rootView.findViewById<LinearLayout>(R.id.llStaffTimeSheets)
         timeSheets.forEachIndexed { index, timeSheet ->
             val component = StaffTimesheetComponent(context, timeSheet,timeSheetViewModel)
+            listStaffTimesheetComponent.add(component)
             llTimeSheet.addView(component.createView())
             if (index != timeSheets.lastIndex) {
                 val divider = View(context)
@@ -67,6 +69,17 @@ class TimeSheetComponent constructor(
         param.bottomMargin = margin
 
         return param
+    }
+
+    fun addMaxTree(timeSheets: List<TimeSheet>){
+        listStaffTimesheetComponent.forEach { component ->
+            val componentId = component.getTimeSheetId()
+            timeSheets.find { it.timeSheetId == componentId }?.let {
+                timeSheet ->
+                component.addMaxTree(timeSheet.block.listRowTimeSheet)
+            }
+        }
+
     }
 
 }

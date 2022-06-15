@@ -15,6 +15,7 @@ import androidx.core.widget.addTextChangedListener
 import com.frank.timesheet.R
 import com.frank.timesheet.base.component.BaseComponent
 import com.frank.timesheet.data.entities.RateType
+import com.frank.timesheet.data.entities.RowTimeSheet
 import com.frank.timesheet.data.entities.TimeSheet
 import com.frank.timesheet.data.entities.TypeJob
 import com.frank.timesheet.databinding.ComponentStaffTimesheetBinding
@@ -27,7 +28,6 @@ class StaffTimesheetComponent constructor(
     private val timeSheetViewModel: TimeSheetViewModel
 ) :
     BaseComponent(context) {
-
 
     private val listAvatarBackgroundColor =
         listOf("#cc6699", "#993366", "#993333", "#800000", "#993300")
@@ -43,6 +43,8 @@ class StaffTimesheetComponent constructor(
     private var tvOrchardName: TextView? = null
     private var tvBlockName: TextView? = null
     private var edtPieceRate: EditText? = null
+
+    private var rowComponent: RowComponent? = null
 
     override fun createView(): View {
         val inflater = LayoutInflater.from(context)
@@ -163,23 +165,30 @@ class StaffTimesheetComponent constructor(
             }
         }
 
-        timeSheetViewModel.changeRateType(currentRateType, getTimeSheetId(), typeJob = timeSheet.typeJob)
+        timeSheetViewModel.changeRateType(
+            currentRateType,
+            getTimeSheetId(),
+            typeJob = timeSheet.typeJob
+        )
     }
 
     private fun initRowTimeSheet() {
-        val rowComponent =
-            RowComponent(
-                context = context,
-                listRowTimeSheet = timeSheet.block.listRowTimeSheet,
-                timeSheetId = getTimeSheetId(),
-                typeJob = timeSheet.typeJob,
-                timeSheetViewModel = timeSheetViewModel
-            )
-        llRows?.addView(rowComponent.createView())
+        rowComponent = RowComponent(
+            context = context,
+            listRowTimeSheet = timeSheet.block.listRowTimeSheet,
+            timeSheetId = getTimeSheetId(),
+            typeJob = timeSheet.typeJob,
+            timeSheetViewModel = timeSheetViewModel
+        )
+        llRows?.addView(rowComponent?.createView())
     }
 
-    private fun getTimeSheetId(): Int {
+     fun getTimeSheetId(): Int {
         return timeSheet.timeSheetId
+    }
+
+    fun addMaxTree(listRowTimeSheet: List<RowTimeSheet>){
+        rowComponent?.addMaxTree(listRowTimeSheet)
     }
 
 }

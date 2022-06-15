@@ -34,6 +34,7 @@
                 android:background="@null"
                 tools:text="2"
                 android:id="@+id/edtTreeNumber"
+                android:minWidth="10dp"
                 android:maxLines="1"
                 android:inputType="number"
                 style="@style/body_text"

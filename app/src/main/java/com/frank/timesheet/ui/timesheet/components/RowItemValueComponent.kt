@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import com.frank.timesheet.R
 import com.frank.timesheet.base.component.BaseComponent
+import com.frank.timesheet.common.Utils
 import com.frank.timesheet.data.entities.RowTimeSheet
 import com.frank.timesheet.data.entities.TypeJob
 import com.frank.timesheet.ui.timesheet.TimeSheetViewModel
@@ -30,9 +31,20 @@ class RowItemValueComponent constructor(
         tvRowValueTitle.text = context.resources.getString(R.string.tree_for_row, row.row.rowName)
 
         val tvTotalTreeNumber = rootView.findViewById<TextView>(R.id.tvTotalTreeNumber)
-        tvTotalTreeNumber.text = row.row.maxTreeNumber.toString()
+        val maxTree = row.row.maxTreeNumber.toString()
+        tvTotalTreeNumber.text = "/$maxTree"
+
+        rootView.setOnClickListener {
+            edtTreeNumber?.requestFocus()
+            val length = edtTreeNumber?.length() ?: 0
+            if(length > 0) {
+                edtTreeNumber?.setSelection(length)
+            }
+            Utils.showSoftKeyboard(edtTreeNumber,context)
+        }
 
         edtTreeNumber = rootView.findViewById(R.id.edtTreeNumber)
+
         edtTreeNumber?.setText(row.treeOfCurrentCustomer.toString())
 
         edtTreeNumber?.addTextChangedListener { text ->

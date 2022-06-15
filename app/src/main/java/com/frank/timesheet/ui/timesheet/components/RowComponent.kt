@@ -113,5 +113,14 @@ class RowComponent constructor(
         return param
     }
 
+    fun addMaxTree(listRowTimeSheet: List<RowTimeSheet>){
+        listRowValueItemComponent.forEach { rowValueItemComponent ->
+            val componentId = rowValueItemComponent.getRowId()
+            listRowTimeSheet.find { it.row.rowId == componentId }?.treeOfCurrentCustomer?.let {
+                treeNumber ->
+                rowValueItemComponent.updateTreeNumber(treeNumber)
+            }
+        }
+    }
 
 }

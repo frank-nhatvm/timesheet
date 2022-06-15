@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import com.frank.timesheet.common.EventObserver
 import com.frank.timesheet.common.Utils
 import com.frank.timesheet.databinding.FragmentTimesheetBinding
 import com.frank.timesheet.ui.timesheet.components.TimeSheetComponent
@@ -19,6 +20,8 @@ class TimesheetFragment : Fragment() {
     private lateinit var binding: FragmentTimesheetBinding
     private var isRenderPruningTimeSheet = false
     private var isRenderThinningTimeSheet = false
+    private var pruningTimeSheetComponent: TimeSheetComponent? = null
+    private var thinningTimeSheetComponent: TimeSheetComponent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,31 +40,51 @@ class TimesheetFragment : Fragment() {
         viewModel.listPruningTimeSheet.observe(viewLifecycleOwner) { list ->
             if (!isRenderPruningTimeSheet) {
                 isRenderPruningTimeSheet = true
-                val pruningTimeSheetComponent =
-                    TimeSheetComponent(
-                        context = requireContext(),
-                        timeSheets = list,
-                        timeSheetViewModel = viewModel
-                    )
-                binding.llTimeSheet.addView(pruningTimeSheetComponent.createView(), generateParam())
-            }
-        }
-
-        viewModel.listThinningTimeSheet.observe(viewLifecycleOwner) { list ->
-            if (!isRenderThinningTimeSheet) {
-                isRenderThinningTimeSheet = true
-                val thinningTimeSheetComponent =
+                pruningTimeSheetComponent =
                     TimeSheetComponent(
                         context = requireContext(),
                         timeSheets = list,
                         timeSheetViewModel = viewModel
                     )
                 binding.llTimeSheet.addView(
-                    thinningTimeSheetComponent.createView(),
+                    pruningTimeSheetComponent?.createView(),
                     generateParam()
                 )
             }
         }
+
+        viewModel.listThinningTimeSheet.observe(viewLifecycleOwner) { list ->
+            if (!isRenderThinningTimeSheet) {
+                isRenderThinningTimeSheet = true
+                thinningTimeSheetComponent =
+                    TimeSheetComponent(
+                        context = requireContext(),
+                        timeSheets = list,
+                        timeSheetViewModel = viewModel
+                    )
+                binding.llTimeSheet.addView(
+                    thinningTimeSheetComponent?.createView(),
+                    generateParam()
+                )
+            }
+        }
+
+        viewModel.pruningTimeSheetAddMaxTree.observe(viewLifecycleOwner, EventObserver { isAdd ->
+            if (isAdd) {
+                viewModel.listPruningTimeSheet.value?.let { list ->
+                    pruningTimeSheetComponent?.addMaxTree(list)
+                }
+            }
+        })
+
+        viewModel.thinningTimeSheetAddMaxTree.observe(viewLifecycleOwner, EventObserver { isAdd ->
+            if (isAdd) {
+                viewModel.listThinningTimeSheet.value?.let { list ->
+                    thinningTimeSheetComponent?.addMaxTree(list)
+                }
+            }
+        })
+
     }
 
     private fun generateParam(): LinearLayout.LayoutParams {
