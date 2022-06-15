@@ -1,5 +1,6 @@
 package com.frank.timesheet.data.repositories
 
+import com.frank.timesheet.data.datarequests.TimeSheetItemsDataRequest
 import com.frank.timesheet.data.entities.*
 
 class TimeSheetRepository {
@@ -170,5 +171,9 @@ class TimeSheetRepository {
         return listOf(barcoPruningTimeSheet, henryPhamPruningTimeSheet, dariJanThinningTimeSheet)
     }
 
+
+    fun saveTimeSheet(timeSheetItemsDataRequest: TimeSheetItemsDataRequest){
+        // call to remote data source
+    }
 }
 

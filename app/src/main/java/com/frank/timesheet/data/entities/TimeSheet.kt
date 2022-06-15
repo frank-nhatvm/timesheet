@@ -1,5 +1,9 @@
 package com.frank.timesheet.data.entities
 
+import com.frank.timesheet.data.datarequests.BlockTimeSheetDataRequest
+import com.frank.timesheet.data.datarequests.RowTimeSheetDataRequest
+import com.frank.timesheet.data.datarequests.TimeSheetDataRequest
+
 
 class TimeSheet(
     val timeSheetId: Int,
@@ -13,6 +17,19 @@ class TimeSheet(
     fun blockName(): String {
         return block.blockName
     }
+
+    fun toTimeSheetDataRequest(): TimeSheetDataRequest{
+        return TimeSheetDataRequest(
+            time_sheet_id = timeSheetId,
+            staff_id = staff.staffId,
+            block = block.toBlockTimeSheetDataRequest(),
+            orchard_name = orchardName,
+            rate_type = rateType.type,
+            rate_value = rateValue,
+            type_job = typeJob.type
+        )
+    }
+
 }
 
 class BlockTimeSheet(
@@ -20,6 +37,7 @@ class BlockTimeSheet(
     val blockName: String,
     val listRowTimeSheet: List<RowTimeSheet>
 ) {
+
     fun toggleRow(rowId: Int, isSelected: Boolean) {
         listRowTimeSheet.forEach { rowTimeSheet ->
             if (rowTimeSheet.row.rowId == rowId) {
@@ -36,7 +54,7 @@ class BlockTimeSheet(
         }
     }
 
-    fun updateMaxTree(mapStaffWorkingRow:Map<Int,Int>, shouldAddRemainderTree: Boolean){
+    fun updateMaxTree(mapStaffWorkingRow: Map<Int, Int>, shouldAddRemainderTree: Boolean) {
         listRowTimeSheet.forEach { rowTimeSheet ->
             if (rowTimeSheet.isSelected) {
                 val rowId = rowTimeSheet.row.rowId
@@ -53,6 +71,11 @@ class BlockTimeSheet(
         }
     }
 
+    fun toBlockTimeSheetDataRequest(): BlockTimeSheetDataRequest {
+        return BlockTimeSheetDataRequest(block_id = blockId,
+            rows = listRowTimeSheet.map { it.toRowTimeSheetDataRequest() }
+        )
+    }
 }
 
 class RowTimeSheet(
@@ -86,6 +109,13 @@ class RowTimeSheet(
 
     fun hasDoneTask(): Boolean {
         return listTask.isNotEmpty()
+    }
+
+    fun toRowTimeSheetDataRequest(): RowTimeSheetDataRequest {
+        return RowTimeSheetDataRequest(
+            row_id = row.rowId,
+            tree_number = treeOfCurrentCustomer
+        )
     }
 
 }

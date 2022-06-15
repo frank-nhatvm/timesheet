@@ -94,6 +94,10 @@ class TimesheetFragment : Fragment() {
             EventObserver { rate ->
                 thinningTimeSheetComponent?.updatePieceRateValue(rate)
             })
+
+        binding.btnConfirm.setOnClickListener {
+            viewModel.confirmTimeSheet()
+        }
     }
 
     private fun generateParam(): LinearLayout.LayoutParams {

@@ -12,4 +12,5 @@
     <string name="apply_to_all">Apply to all</string>
     <string name="tree_for_row">Tree for row %s</string>
     <string name="wages_rate_description">%s (Job name) will be paid by wages in this timesheet.</string>
+    <string name="confirm">Confirm</string>
 </resources>

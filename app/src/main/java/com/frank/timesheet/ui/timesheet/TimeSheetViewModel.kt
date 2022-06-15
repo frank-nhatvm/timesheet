@@ -1,9 +1,12 @@
 package com.frank.timesheet.ui.timesheet
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.frank.timesheet.common.Event
+import com.frank.timesheet.data.datarequests.TimeSheetDataRequest
+import com.frank.timesheet.data.datarequests.TimeSheetItemsDataRequest
 import com.frank.timesheet.data.entities.RateType
 import com.frank.timesheet.data.entities.TimeSheet
 import com.frank.timesheet.data.entities.TypeJob
@@ -273,6 +276,18 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
 
         return hm
     }
+
+    fun confirmTimeSheet(){
+        val listPruningTimeSheetDataRequest = listPruningTimeSheet.value?.map { it.toTimeSheetDataRequest() } ?: emptyList()
+        val listThinningTimeSheetDataRequest = listThinningTimeSheet.value?.map { it.toTimeSheetDataRequest() } ?: emptyList()
+        val listTimeSheetDataRequest = mutableListOf<TimeSheetDataRequest>()
+        listTimeSheetDataRequest.addAll(listPruningTimeSheetDataRequest)
+        listTimeSheetDataRequest.addAll(listThinningTimeSheetDataRequest)
+        val timeSheetItemsDataRequest = TimeSheetItemsDataRequest(items = listTimeSheetDataRequest)
+        Log.e("Frank",timeSheetItemsDataRequest.toString())
+        timeSheetRepository.saveTimeSheet(timeSheetItemsDataRequest)
+    }
+
 
 
 }
