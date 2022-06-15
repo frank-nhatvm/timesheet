@@ -81,5 +81,9 @@ class TimeSheetComponent constructor(
         }
 
     }
-
+    fun updatePieceRateValue(newRate: String) {
+        listStaffTimesheetComponent.forEach { component ->
+            component.updatePieceRateValue(newRate)
+        }
+    }
 }

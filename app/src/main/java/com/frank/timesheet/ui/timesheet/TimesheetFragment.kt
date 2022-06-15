@@ -85,6 +85,15 @@ class TimesheetFragment : Fragment() {
             }
         })
 
+        viewModel.pruningTimeSheetApplyPieceRate.observe(viewLifecycleOwner, EventObserver { rate ->
+            pruningTimeSheetComponent?.updatePieceRateValue(rate)
+        })
+
+        viewModel.thinningTimeSheetApplyPieceRate.observe(
+            viewLifecycleOwner,
+            EventObserver { rate ->
+                thinningTimeSheetComponent?.updatePieceRateValue(rate)
+            })
     }
 
     private fun generateParam(): LinearLayout.LayoutParams {

@@ -28,6 +28,14 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
     val thinningTimeSheetAddMaxTree: LiveData<Event<Boolean>>
         get() = _thinningTimeSheetAddMaxTree
 
+    private var _pruningTimeSheetApplyPieceRate = MutableLiveData<Event<String>>()
+    val pruningTimeSheetApplyPieceRate: LiveData<Event<String>>
+        get() = _pruningTimeSheetApplyPieceRate
+
+    private var _thinningTimeSheetApplyPieceRate = MutableLiveData<Event<String>>()
+    val thinningTimeSheetApplyPieceRate: LiveData<Event<String>>
+        get() = _thinningTimeSheetApplyPieceRate
+
     fun fetchData() {
         val timeSheets = timeSheetRepository.getTimeSheet()
         val pruningTimeSheets = timeSheets.filter { it.typeJob == TypeJob.PRUNING }
@@ -98,6 +106,7 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
                 }
             }
             _listPruningTimeSheet.postValue(currentList)
+            _pruningTimeSheetApplyPieceRate.postValue(Event(rate))
         }
     }
 
@@ -109,6 +118,7 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
                 }
             }
             _listThinningTimeSheet.postValue(currentList)
+            _thinningTimeSheetApplyPieceRate.postValue(Event(rate))
         }
     }
 
