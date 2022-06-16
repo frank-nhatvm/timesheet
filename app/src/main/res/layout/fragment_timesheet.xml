@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,23 +12,50 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/llTimeSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="24dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible">
 
+            <LinearLayout
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/primary_color"
+                    app:tabTextColor="#64B1CB">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabPassOrders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pruning" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabUpcomingOrders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/thinning" />
+
+                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/cta_button"
-            android:id="@+id/btnConfirm"
-            android:text="@string/confirm"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

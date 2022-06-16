@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/background_row_item_selected.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/background_staff_name.xml" value="0.2025" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/adapter_time_sheet.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/component_row_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/component_row_item_value.xml" value="0.33" />
         <entry key="app/src/main/res/layout/component_staff_timesheet.xml" value="0.25" />
