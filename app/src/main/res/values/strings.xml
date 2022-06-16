@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">timesheet</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="thinning">Thinning</string>
+    <string name="pruning">Pruning</string>
+    <string name="add_max_trees">Add max trees</string>
+    <string name="orchard">Orchard</string>
+    <string name="block">Block</string>
+    <string name="rate_type">Rate type</string>
+    <string name="piece_rate">Piece rate</string>
+    <string name="wages">Wages</string>
+    <string name="rate">Rate</string>
+    <string name="apply_to_all">Apply to all</string>
+    <string name="tree_for_row">Tree for row %s</string>
+    <string name="wages_rate_description">%s (Job name) will be paid by wages in this timesheet.</string>
+    <string name="confirm">Confirm</string>
 </resources>
