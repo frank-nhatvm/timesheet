@@ -31,12 +31,12 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
     val thinningTimeSheetAddMaxTree: LiveData<Event<Boolean>>
         get() = _thinningTimeSheetAddMaxTree
 
-    private var _pruningTimeSheetApplyPieceRate = MutableLiveData<Event<String>>()
-    val pruningTimeSheetApplyPieceRate: LiveData<Event<String>>
+    private var _pruningTimeSheetApplyPieceRate = MutableLiveData<Event<Boolean>>()
+    val pruningTimeSheetApplyPieceRate: LiveData<Event<Boolean>>
         get() = _pruningTimeSheetApplyPieceRate
 
-    private var _thinningTimeSheetApplyPieceRate = MutableLiveData<Event<String>>()
-    val thinningTimeSheetApplyPieceRate: LiveData<Event<String>>
+    private var _thinningTimeSheetApplyPieceRate = MutableLiveData<Event<Boolean>>()
+    val thinningTimeSheetApplyPieceRate: LiveData<Event<Boolean>>
         get() = _thinningTimeSheetApplyPieceRate
 
     fun fetchData() {
@@ -102,6 +102,7 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
     private fun updatePieceRateForAllPruningTimeSheet(
         rate: String, timeSheetId: Int,
     ) {
+        _pruningTimeSheetApplyPieceRate.postValue(Event(false))
         listPruningTimeSheet.value?.let { currentList ->
             currentList.forEach { timeSheet ->
                 if (timeSheet.timeSheetId != timeSheetId && timeSheet.rateType == RateType.PIECE_RATE) {
@@ -109,11 +110,12 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
                 }
             }
             _listPruningTimeSheet.postValue(currentList)
-            _pruningTimeSheetApplyPieceRate.postValue(Event(rate))
+            _pruningTimeSheetApplyPieceRate.postValue(Event(true))
         }
     }
 
     private fun updatePieceRateForAllThinningTimeSheet(rate: String, timeSheetId: Int) {
+        _thinningTimeSheetApplyPieceRate.postValue(Event(false))
         listThinningTimeSheet.value?.let { currentList ->
             currentList.forEach { timesheet ->
                 if (timesheet.timeSheetId != timeSheetId && timesheet.rateType == RateType.PIECE_RATE) {
@@ -121,7 +123,7 @@ class TimeSheetViewModel constructor(private val timeSheetRepository: TimeSheetR
                 }
             }
             _listThinningTimeSheet.postValue(currentList)
-            _thinningTimeSheetApplyPieceRate.postValue(Event(rate))
+            _thinningTimeSheetApplyPieceRate.postValue(Event(true))
         }
     }
 

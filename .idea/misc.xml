@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/background_button_add_max_tree.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/background_adapter_timesheet.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/background_button_add_max_tree.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/background_circle_done_task.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/background_rate_type_button_selected.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/background_rate_type_button_unselected.xml" value="0.2025" />
@@ -11,13 +12,17 @@
         <entry key="app/src/main/res/drawable/background_row_item.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/background_row_item_selected.xml" value="0.2025" />
         <entry key="app/src/main/res/drawable/background_staff_name.xml" value="0.2025" />
+        <entry key="app/src/main/res/drawable/background_top_component_timesheet.xml" value="0.207" />
+        <entry key="app/src/main/res/drawable/divider_staff_timesheet.xml" value="0.2085" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2546875" />
-        <entry key="app/src/main/res/layout/adapter_time_sheet.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/adapter_time_sheet.xml" value="0.28489583333333335" />
+        <entry key="app/src/main/res/layout/component_row.xml" value="0.14192708333333334" />
         <entry key="app/src/main/res/layout/component_row_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/component_row_item_value.xml" value="0.33" />
         <entry key="app/src/main/res/layout/component_staff_timesheet.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/component_timesheet.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/component_timesheet.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_timesheet.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/fragment_timesheet_child.xml" value="0.28489583333333335" />
       </map>
     </option>
   </component>

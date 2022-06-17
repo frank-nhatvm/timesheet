@@ -50,6 +50,7 @@ class TimeSheetAdapter constructor(private val timeSheetViewModel: TimeSheetView
             adapterTimeSheetBinding.tvOrchardName.text = timeSheet.orchardName
             adapterTimeSheetBinding.tvBlockName.text = timeSheet.blockName()
             adapterTimeSheetBinding.edtPieceRate.setText(timeSheet.rateValue)
+            adapterTimeSheetBinding.tvStaffName.text = timeSheet.staff.fullName()
 
             val context = adapterTimeSheetBinding.root.context
 
@@ -173,6 +174,7 @@ class TimeSheetAdapter constructor(private val timeSheetViewModel: TimeSheetView
             timeSheet: TimeSheet,
             timeSheetViewModel: TimeSheetViewModel
         ) {
+            adapterTimeSheetBinding.llRows.removeAllViews()
             val rowComponent = RowComponent(
                 context = context,
                 listRowTimeSheet = timeSheet.block.listRowTimeSheet,
